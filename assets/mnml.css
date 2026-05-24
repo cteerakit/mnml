@@ -1,0 +1,323 @@
+/* Gmail */
+html[data-mnml-gmail-logo] a[aria-label="Gmail"] {
+  display: none !important;
+}
+
+html[data-mnml-gmail-leftSidebarMenus] [role="navigation"] .V3 {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.15s ease;
+}
+
+html[data-mnml-gmail-leftSidebarMenus] [role="navigation"]:hover .V3,
+html[data-mnml-gmail-leftSidebarMenus] [role="navigation"]:focus-within .V3 {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+html[data-mnml-gmail-floatingCompose] [role="navigation"] .aic {
+  display: none !important;
+}
+
+html[data-mnml-gmail-listToolbar] [role="main"] [gh="tm"] > * {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.15s ease;
+}
+
+html[data-mnml-gmail-listToolbar] [role="main"] [gh="tm"]:hover > *,
+html[data-mnml-gmail-listToolbar] [role="main"] [gh="tm"]:focus-within > * {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.mnml-floating-compose {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 10000;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: none;
+  border-radius: 16px;
+  background-color: #c2e7ff;
+  background-image: url("https://www.gstatic.com/images/icons/material/system_gm/1x/create_black_24dp.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  box-shadow:
+    0 1px 2px 0 rgb(60 64 67 / 30%),
+    0 1px 3px 1px rgb(60 64 67 / 15%);
+  cursor: pointer;
+  user-select: none;
+}
+
+.mnml-floating-compose:hover {
+  box-shadow:
+    0 1px 3px 0 rgb(60 64 67 / 30%),
+    0 4px 8px 3px rgb(60 64 67 / 15%);
+}
+
+.mnml-floating-compose:focus-visible {
+  outline: 2px solid #0b57d0;
+  outline-offset: 2px;
+}
+
+html[data-mnml-gmail-sidePanel] [role="complementary"][aria-label="Side panel"],
+html[data-mnml-gmail-sidePanel] [aria-label="Show side panel"] {
+  display: none !important;
+}
+
+html[data-mnml-gmail-searchBar] form[role="search"],
+html[data-mnml-gmail-searchBar] input[aria-label="Search mail"] {
+  display: none !important;
+}
+
+html[data-mnml-gmail-minimalSearchBar] {
+  --mnml-gmail-search-collapsed-width: 200px;
+  --mnml-gmail-search-expanded-max-width: 720px;
+}
+
+html[data-mnml-gmail-minimalSearchBar] .gb_Pd.gb_Sd.gb_4d {
+  position: relative !important;
+}
+
+html[data-mnml-gmail-minimalSearchBar] form[role="search"] {
+  position: absolute !important;
+  left: 50% !important;
+  z-index: 2 !important;
+  width: var(--mnml-gmail-search-collapsed-width) !important;
+  max-width: var(--mnml-gmail-search-collapsed-width) !important;
+  transform: translateX(-50%) !important;
+  transition:
+    width 0.2s ease,
+    max-width 0.2s ease;
+}
+
+html[data-mnml-gmail-minimalSearchBar] form[role="search"]:not(:hover):not(:focus-within)
+  [aria-label="Advanced search options"] {
+  display: none !important;
+}
+
+html[data-mnml-gmail-minimalSearchBar]
+  form[role="search"]:not(:hover):not(:focus-within)
+  input[aria-label="Search mail"]::placeholder {
+  opacity: 0 !important;
+}
+
+html[data-mnml-gmail-minimalSearchBar] form[role="search"]:hover,
+html[data-mnml-gmail-minimalSearchBar] form[role="search"]:focus-within {
+  width: 100% !important;
+  max-width: var(--mnml-gmail-search-expanded-max-width) !important;
+  transform: translateX(-50%) !important;
+}
+
+html[data-mnml-gmail-topRightIcons]:not([data-mnml-gmail-topRightIcons-expanded])
+  .gb_v.gb_we.bGJ > :not(#mnml-top-right-toggle-wrap),
+html[data-mnml-gmail-topRightIcons]:not([data-mnml-gmail-topRightIcons-expanded])
+  a[aria-label="Google apps"],
+html[data-mnml-gmail-topRightIcons]:not([data-mnml-gmail-topRightIcons-expanded])
+  div.gb_z:has(a[aria-label^="Google Account"]),
+html[data-mnml-gmail-topRightIcons]:not([data-mnml-gmail-topRightIcons-expanded])
+  a[aria-label^="Google Account"] {
+  display: none !important;
+}
+
+html[data-mnml-gmail-topRightIcons] .gb_v.gb_we.bGJ {
+  display: flex !important;
+  align-items: center;
+}
+
+/* Match native .gb_xe hit target (24px icon + 8px padding, content-box). */
+html[data-mnml-gmail-topRightIcons] a.mnml-top-right-toggle {
+  box-sizing: content-box !important;
+  display: inline-block !important;
+  line-height: 0 !important;
+}
+
+html[data-mnml-gmail-topRightIcons] a.mnml-top-right-toggle svg.t7 {
+  display: inline !important;
+  flex-shrink: 0 !important;
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+}
+
+html[data-mnml-gmail-footer] .yg,
+html[data-mnml-gmail-footer] div[role="contentinfo"],
+html[data-mnml-gmail-footer] .bvz {
+  display: none !important;
+}
+
+/* White rounded main pane — list shrinks to content; thread scrolls inside card */
+html[data-mnml-gmail-contentWidth="small"] {
+  --mnml-gmail-content-max-width: 720px;
+}
+
+html[data-mnml-gmail-contentWidth="medium"] {
+  --mnml-gmail-content-max-width: 1024px;
+}
+
+html[data-mnml-gmail-contentWidth="large"] {
+  --mnml-gmail-content-max-width: 1280px;
+}
+
+html[data-mnml-gmail-contentWidth="small"],
+html[data-mnml-gmail-contentWidth="medium"],
+html[data-mnml-gmail-contentWidth="large"] {
+  --mnml-gmail-header-offset: 64px;
+  --mnml-gmail-content-card-max-height: calc(
+    100vh - var(--mnml-gmail-header-offset) - 24px
+  );
+  --mnml-gmail-content-list-max-height: calc(
+    100vh - var(--mnml-gmail-header-offset) - 120px
+  );
+  /* Nudge inbox card above vertical center */
+  --mnml-gmail-list-offset-y: -48px;
+}
+
+/* Shared: center the card horizontally in the main column */
+html[data-mnml-gmail-contentWidth="small"] .nH.bkK,
+html[data-mnml-gmail-contentWidth="medium"] .nH.bkK,
+html[data-mnml-gmail-contentWidth="large"] .nH.bkK {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  align-self: stretch !important;
+  width: 100% !important;
+  min-height: calc(100vh - var(--mnml-gmail-header-offset)) !important;
+  height: auto !important;
+}
+
+html[data-mnml-gmail-contentWidth="small"] .nH.bkK > .nH:has(.nH.ar4.z),
+html[data-mnml-gmail-contentWidth="medium"] .nH.bkK > .nH:has(.nH.ar4.z),
+html[data-mnml-gmail-contentWidth="large"] .nH.bkK > .nH:has(.nH.ar4.z) {
+  width: 100% !important;
+  max-width: var(--mnml-gmail-content-max-width) !important;
+  margin: auto !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+}
+
+/* Inbox / list: shrink-wrap; scroll the list region when many rows */
+html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"] .nH.bkK {
+  overflow: visible !important;
+}
+
+html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
+  .nH.bkK
+  > .nH:has(.nH.ar4.z) {
+  height: auto !important;
+  overflow: visible !important;
+  transform: translateY(var(--mnml-gmail-list-offset-y)) !important;
+}
+
+html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
+  .nH.bkK
+  > .nH:has(.nH.ar4.z)
+  .nH.ar4.z,
+html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
+  .nH.bkK
+  > .nH:has(.nH.ar4.z)
+  .AO,
+html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
+  .nH.bkK
+  > .nH:has(.nH.ar4.z)
+  .Tm,
+html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
+  .nH.bkK
+  > .nH:has(.nH.ar4.z)
+  .aeF,
+html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
+  .nH.bkK
+  > .nH:has(.nH.ar4.z)
+  [role="main"] {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
+  .nH.bkK
+  > .nH:has(.nH.ar4.z)
+  [role="main"] {
+  display: flex !important;
+  flex-direction: column !important;
+  max-width: 100% !important;
+}
+
+html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
+  .nH.bkK
+  > .nH:has(.nH.ar4.z)
+  [role="main"]
+  > .Nr {
+  flex: 0 1 auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  max-height: var(--mnml-gmail-content-list-max-height) !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
+  .nH.bkK
+  > .nH:has(.nH.ar4.z)
+  .Nu.tf {
+  flex: 0 0 auto !important;
+  flex-grow: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+}
+
+/* Thread / conversation: cap card height and scroll inside (body overflow is hidden) */
+html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="thread"] .nH.bkK {
+  max-height: calc(100vh - var(--mnml-gmail-header-offset)) !important;
+  overflow: hidden !important;
+}
+
+html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="thread"]
+  .nH.bkK
+  > .nH:has(.nH.ar4.z) {
+  max-height: var(--mnml-gmail-content-card-max-height) !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+/* YouTube */
+html[data-mnml-youtube-sidebar] #guide,
+html[data-mnml-youtube-sidebar] ytd-guide-renderer,
+html[data-mnml-youtube-sidebar] tp-yt-app-drawer {
+  display: none !important;
+}
+
+html[data-mnml-youtube-homeFeed] ytd-browse[page-subtype="home"] #contents,
+html[data-mnml-youtube-homeFeed] ytd-rich-grid-renderer {
+  display: none !important;
+}
+
+html[data-mnml-youtube-shorts] ytd-guide-entry-renderer a[title="Shorts"],
+html[data-mnml-youtube-shorts] ytd-reel-shelf-renderer,
+html[data-mnml-youtube-shorts] ytd-mini-guide-entry-renderer a[title="Shorts"] {
+  display: none !important;
+}
+
+html[data-mnml-youtube-comments] #comments,
+html[data-mnml-youtube-comments] ytd-comments,
+html[data-mnml-youtube-comments] #comment-teaser {
+  display: none !important;
+}
+
+html[data-mnml-youtube-related] #secondary,
+html[data-mnml-youtube-related] #related,
+html[data-mnml-youtube-related] ytd-watch-next-secondary-results-renderer {
+  display: none !important;
+}
+
+html[data-mnml-youtube-endScreen] .ytp-endscreen-content,
+html[data-mnml-youtube-endScreen] .ytp-ce-element,
+html[data-mnml-youtube-endScreen] .ytp-ce-covering-overlay {
+  display: none !important;
+}
