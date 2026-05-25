@@ -1,5 +1,11 @@
 import '@/assets/mnml.css';
 
+import type { ContentScriptContext } from 'wxt/utils/content-script-context';
+
+import {
+  isExtensionContextInvalidated,
+  registerInvalidationRejectionGuard,
+} from './extension-context';
 import { applyGmailContentWidth, gmailContentWidthMatches } from './gmail-content-width';
 import { dataAttr, getRulesForPlatform } from './rules';
 import {
@@ -11,7 +17,11 @@ import {
   type Settings,
   YOUTUBE_TOGGLE_KEYS,
 } from './settings';
-import { startDomObserver } from './observer';
+import { startDomObserver, stopDomObserver } from './observer';
+
+if (typeof window !== 'undefined') {
+  registerInvalidationRejectionGuard();
+}
 
 let stylesheetInjected = false;
 
@@ -86,6 +96,7 @@ export async function applyRules(
 
 export async function initPlatform(
   platform: PlatformId,
+  ctx: ContentScriptContext,
   options?: {
     afterApply?: (settings: Settings) => void | Promise<void>;
   },
@@ -93,25 +104,50 @@ export async function initPlatform(
   ensureStylesheet();
 
   const run = async (settings?: Settings) => {
-    const resolved = settings ?? (await getSettings());
-    await applyRules(platform, resolved);
-    await options?.afterApply?.(resolved);
+    if (!ctx.isValid) return;
+
+    try {
+      const resolved = settings ?? (await getSettings());
+      if (!ctx.isValid) return;
+
+      await applyRules(platform, resolved);
+      if (!ctx.isValid) return;
+
+      await options?.afterApply?.(resolved);
+    } catch (error) {
+      if (isExtensionContextInvalidated(error)) return;
+      throw error;
+    }
+  };
+
+  const scheduleRun = (settings?: Settings) => {
+    void run(settings).catch((error) => {
+      if (isExtensionContextInvalidated(error)) return;
+      throw error;
+    });
   };
 
   await run();
 
-  chrome.storage.onChanged.addListener(
-    (
-      changes: Record<string, chrome.storage.StorageChange>,
-      area: string,
-    ) => {
-    if (area !== 'sync' || !changes[SETTINGS_KEY]) return;
+  const onStorageChange = (
+    changes: Record<string, chrome.storage.StorageChange>,
+    area: string,
+  ) => {
+    if (!ctx.isValid || area !== 'sync' || !changes[SETTINGS_KEY]) return;
     const next =
       (changes[SETTINGS_KEY].newValue as Settings | undefined) ??
       DEFAULT_SETTINGS;
-    void run(next);
-    },
-  );
+    scheduleRun(next);
+  };
 
-  startDomObserver(() => run());
+  chrome.storage.onChanged.addListener(onStorageChange);
+  ctx.onInvalidated(() => {
+    chrome.storage.onChanged.removeListener(onStorageChange);
+    stopDomObserver();
+  });
+
+  startDomObserver(() => {
+    if (!ctx.isValid) return;
+    scheduleRun();
+  }, ctx);
 }

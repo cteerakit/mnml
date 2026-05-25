@@ -1,3 +1,8 @@
+import {
+  isExtensionContextInvalidated,
+  isExtensionContextValid,
+} from './extension-context';
+
 export const SETTINGS_KEY = 'mnml_settings';
 
 export type PlatformId = 'gmail' | 'youtube';
@@ -30,8 +35,12 @@ export type GmailPlatformSettings = Record<GmailToggleKey, boolean> & {
 };
 
 export const YOUTUBE_TOGGLE_KEYS = [
-  'sidebar',
-  'homeFeed',
+  'leftSidebar',
+  'createButton',
+  'notificationButton',
+  'voiceSearch',
+  'logo',
+  'searchChips',
   'shorts',
   'comments',
   'related',
@@ -66,8 +75,12 @@ export const DEFAULT_SETTINGS: Settings = {
       contentWidth: 'small',
     },
     youtube: {
-      sidebar: false,
-      homeFeed: false,
+      leftSidebar: false,
+      createButton: false,
+      notificationButton: false,
+      voiceSearch: false,
+      logo: false,
+      searchChips: false,
       shorts: true,
       comments: false,
       related: true,
@@ -77,12 +90,23 @@ export const DEFAULT_SETTINGS: Settings = {
 };
 
 export async function getSettings(): Promise<Settings> {
-  const result = await chrome.storage.sync.get(SETTINGS_KEY);
-  const stored = result[SETTINGS_KEY] as Settings | undefined;
-  if (!stored || stored.version !== 1) {
+  if (!isExtensionContextValid()) {
     return structuredClone(DEFAULT_SETTINGS);
   }
-  return mergeWithDefaults(stored);
+
+  try {
+    const result = await chrome.storage.sync.get(SETTINGS_KEY);
+    const stored = result[SETTINGS_KEY] as Settings | undefined;
+    if (!stored || stored.version !== 1) {
+      return structuredClone(DEFAULT_SETTINGS);
+    }
+    return mergeWithDefaults(stored);
+  } catch (error) {
+    if (isExtensionContextInvalidated(error)) {
+      return structuredClone(DEFAULT_SETTINGS);
+    }
+    throw error;
+  }
 }
 
 export async function setSettings(settings: Settings): Promise<void> {

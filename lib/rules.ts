@@ -28,16 +28,33 @@ export const GMAIL_RULES: RuleMap<GmailToggleKey> = {
 };
 
 export const YOUTUBE_RULES: RuleMap<YoutubeToggleKey> = {
-  sidebar: [
-    '#guide',
-    'ytd-guide-renderer',
+  leftSidebar: [
+    'ytd-mini-guide-renderer',
     '#guide-button',
-    'tp-yt-app-drawer',
+    'ytd-masthead button[aria-label="Guide"]',
   ],
-  homeFeed: [
-    'ytd-browse[page-subtype="home"] #contents',
-    'ytd-rich-grid-renderer',
-    '#primary ytd-rich-grid-renderer',
+  createButton: [
+    'ytd-masthead ytd-button-renderer:has(button[aria-label="Create"])',
+    'ytd-masthead button[aria-label="Create"]',
+  ],
+  notificationButton: [
+    'ytd-masthead ytd-notification-topbar-button-renderer',
+    'ytd-masthead ytd-notification-topbar-button-renderer-lite',
+    'ytd-masthead button[aria-label="Notifications"]',
+  ],
+  voiceSearch: [
+    'ytd-masthead #voice-search-button',
+    'ytd-masthead button[aria-label="Search with your voice"]',
+  ],
+  logo: [
+    'ytd-masthead ytd-topbar-logo-renderer',
+    'ytd-masthead ytd-youtube-premium-logo-renderer',
+  ],
+  searchChips: [
+    'ytd-feed-filter-chip-bar-renderer',
+    '#chips-wrapper',
+    '#frosted-glass',
+    'ytd-rich-grid-renderer #header',
   ],
   shorts: [
     'ytd-guide-entry-renderer a[title="Shorts"]',

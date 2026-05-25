@@ -96,11 +96,11 @@ export const GMAIL_TOGGLES: GmailToggleDef[] = [
     key: 'leftSidebarMenus',
     label: 'Hide left sidebar menus until hover',
     description:
-      'Hide Inbox, labels, and other items in the left sidebar. They appear when you hover the sidebar or move focus into it. Compose stays visible unless floating Compose is on.',
+      'Hide Inbox, labels, and other items in the left sidebar. The main menu button stays subdued until you hover or focus it. Sidebar items appear when you hover the sidebar, the main menu button, or move focus into either. Compose stays visible unless floating Compose is on.',
   },
   {
     key: 'floatingCompose',
-    label: 'Floating Compose button',
+    label: 'Move Compose to floating button',
     description:
       'Move Compose to a floating icon button in the bottom-right corner and hide it in the left sidebar.',
   },
@@ -122,52 +122,73 @@ export const GMAIL_TOGGLES: GmailToggleDef[] = [
   },
   {
     key: 'minimalSearchBar',
-    label: 'Minimal search bar',
+    label: 'Show minimal search bar',
     description:
-      'Show a compact centered search field. Hover to expand and reveal the options icon and placeholder.',
+      'Show a compact centered search field that stays subdued until you hover or focus it. Expands to reveal the options icon and placeholder.',
   },
   {
     key: 'topRightIcons',
     label: 'Hide top-right menu icons',
     description:
-      'Collapse Support, Settings, Gemini, Google apps, and your account avatar. Use the chevron to expand them.',
+      'Collapse Support, Settings, Gemini, Google apps, and your account avatar. The chevron stays subdued until you hover or focus it.',
   },
   {
     key: 'footer',
-    label: 'Footer links',
+    label: 'Hide footer links',
     description: 'Hide Gmail footer links and promos.',
   },
 ];
 
 export const YOUTUBE_TOGGLES: YoutubeToggleDef[] = [
   {
-    key: 'sidebar',
-    label: 'Sidebar',
-    description: 'Hide the left guide and navigation drawer.',
+    key: 'leftSidebar',
+    label: 'Hide left sidebar until hover',
+    description:
+      'Collapse the mini guide and reclaim horizontal space. Hover the left edge or Guide (hamburger) button to reveal navigation. A pinned full guide still opens normally.',
   },
   {
-    key: 'homeFeed',
-    label: 'Home feed',
-    description: 'Hide the main video grid on the YouTube homepage.',
+    key: 'createButton',
+    label: 'Hide Create button',
+    description: 'Hide the Create upload button in the top bar.',
+  },
+  {
+    key: 'notificationButton',
+    label: 'Hide notifications button',
+    description: 'Hide the notifications bell in the top bar.',
+  },
+  {
+    key: 'voiceSearch',
+    label: 'Hide voice search button',
+    description: 'Hide the microphone button next to the search field.',
+  },
+  {
+    key: 'logo',
+    label: 'Hide YouTube / Premium logo',
+    description: 'Hide the YouTube or YouTube Premium logo in the header.',
+  },
+  {
+    key: 'searchChips',
+    label: 'Hide search chips',
+    description: 'Hide the category filter chips below the search bar on the home feed.',
   },
   {
     key: 'shorts',
-    label: 'Shorts',
+    label: 'Hide Shorts',
     description: 'Hide Shorts shelves and navigation entries.',
   },
   {
     key: 'comments',
-    label: 'Comments',
+    label: 'Hide comments',
     description: 'Hide the comment section on watch pages.',
   },
   {
     key: 'related',
-    label: 'Related videos',
+    label: 'Hide related videos',
     description: 'Hide the right-hand suggestions column.',
   },
   {
     key: 'endScreen',
-    label: 'End screens',
+    label: 'Hide end screens',
     description: 'Hide end-screen overlays and cards in the player.',
   },
 ];

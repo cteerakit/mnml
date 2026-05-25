@@ -25,7 +25,7 @@ export function ContentWidthPicker({
 }: ContentWidthPickerProps) {
   return (
     <div className="flex flex-col gap-2 py-3">
-      <Label className="text-sm font-medium">Main content width</Label>
+      <Label className="text-sm font-medium">Limit main content width</Label>
       <p className="text-xs text-muted-foreground">
         Limit how wide the inbox and reading pane can grow. Full uses Gmail&apos;s
         default layout.
@@ -33,7 +33,7 @@ export function ContentWidthPicker({
       <div
         className="grid grid-cols-4 gap-1 rounded-lg border bg-muted/40 p-1"
         role="radiogroup"
-        aria-label="Main content width"
+        aria-label="Limit main content width"
       >
         {GMAIL_CONTENT_WIDTHS.map((width) => {
           const selected = value === width;
