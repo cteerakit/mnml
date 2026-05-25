@@ -20,6 +20,10 @@ pnpm build
 pnpm zip
 ```
 
+## Privacy policy
+
+See [PRIVACY.md](./PRIVACY.md) for the Chrome Web Store privacy policy. Host it at a public URL (for example [GitHub Pages](https://docs.github.com/en/pages)) and use that link in the developer dashboard.
+
 ## Stack
 
 - [WXT](https://wxt.dev) + React + TypeScript
