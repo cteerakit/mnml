@@ -213,9 +213,9 @@ html[data-mnml-gmail-contentWidth="large"] .nH.bkK {
   height: auto !important;
 }
 
-html[data-mnml-gmail-contentWidth="small"] .nH.bkK > .nH:has(.nH.ar4.z),
-html[data-mnml-gmail-contentWidth="medium"] .nH.bkK > .nH:has(.nH.ar4.z),
-html[data-mnml-gmail-contentWidth="large"] .nH.bkK > .nH:has(.nH.ar4.z) {
+html[data-mnml-gmail-contentWidth="small"] .nH.bkK > .nH:has(.nH.ar4),
+html[data-mnml-gmail-contentWidth="medium"] .nH.bkK > .nH:has(.nH.ar4),
+html[data-mnml-gmail-contentWidth="large"] .nH.bkK > .nH:has(.nH.ar4) {
   width: 100% !important;
   max-width: var(--mnml-gmail-content-max-width) !important;
   margin: auto !important;
@@ -230,7 +230,7 @@ html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"] .nH.bkK {
 
 html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
   .nH.bkK
-  > .nH:has(.nH.ar4.z) {
+  > .nH:has(.nH.ar4) {
   height: auto !important;
   overflow: visible !important;
   transform: translateY(var(--mnml-gmail-list-offset-y)) !important;
@@ -238,23 +238,23 @@ html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
 
 html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
   .nH.bkK
-  > .nH:has(.nH.ar4.z)
-  .nH.ar4.z,
+  > .nH:has(.nH.ar4)
+  .nH.ar4,
 html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
   .nH.bkK
-  > .nH:has(.nH.ar4.z)
+  > .nH:has(.nH.ar4)
   .AO,
 html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
   .nH.bkK
-  > .nH:has(.nH.ar4.z)
+  > .nH:has(.nH.ar4)
   .Tm,
 html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
   .nH.bkK
-  > .nH:has(.nH.ar4.z)
+  > .nH:has(.nH.ar4)
   .aeF,
 html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
   .nH.bkK
-  > .nH:has(.nH.ar4.z)
+  > .nH:has(.nH.ar4)
   [role="main"] {
   height: auto !important;
   min-height: 0 !important;
@@ -262,7 +262,7 @@ html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
 
 html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
   .nH.bkK
-  > .nH:has(.nH.ar4.z)
+  > .nH:has(.nH.ar4)
   [role="main"] {
   display: flex !important;
   flex-direction: column !important;
@@ -271,9 +271,9 @@ html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
 
 html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
   .nH.bkK
-  > .nH:has(.nH.ar4.z)
+  > .nH:has(.nH.ar4)
   [role="main"]
-  > .Nr {
+  .Nr {
   flex: 0 1 auto !important;
   height: auto !important;
   min-height: 0 !important;
@@ -285,7 +285,7 @@ html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
 
 html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="list"]
   .nH.bkK
-  > .nH:has(.nH.ar4.z)
+  > .nH:has(.nH.ar4)
   .Nu.tf {
   flex: 0 0 auto !important;
   flex-grow: 0 !important;
@@ -302,7 +302,7 @@ html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="thread"] .nH.bkK {
 
 html[data-mnml-gmail-contentWidth][data-mnml-gmail-layout="thread"]
   .nH.bkK
-  > .nH:has(.nH.ar4.z) {
+  > .nH:has(.nH.ar4) {
   max-height: var(--mnml-gmail-content-card-max-height) !important;
   overflow-x: hidden !important;
   overflow-y: auto !important;

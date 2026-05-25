@@ -3,17 +3,21 @@ import type { Settings } from './settings';
 export const GMAIL_CONTENT_WIDTH_ATTR = 'data-mnml-gmail-contentWidth';
 export const GMAIL_LAYOUT_ATTR = 'data-mnml-gmail-layout';
 
-const GMAIL_CONTENT_CARD_SELECTOR = '.nH.bkK > .nH:has(.nH.ar4.z)';
+/** Inbox uses .nH.ar4.z; search/labels use .nH.ar4 with other suffixes (e.g. j7diG). */
+const GMAIL_CONTENT_CARD_SELECTOR = '.nH.bkK > .nH:has(.nH.ar4)';
 const GMAIL_HEIGHT_RESET_ATTR = 'data-mnml-gmail-height-reset';
 
 /** Elements Gmail sizes with inline height / flex-grow; reset for inbox shrink-wrap only. */
+const GMAIL_LIST_ROW_SELECTOR =
+  'table.Cp tbody tr, tr:has(span[data-thread-id])';
+
 const GMAIL_LIST_HEIGHT_RESET_SELECTORS = [
-  '.nH.ar4.z',
+  '.nH.ar4',
   '.AO',
   '.Tm',
   '.aeF',
   '[role="main"]',
-  '[role="main"] > .Nr',
+  '[role="main"] .Nr',
   '.Nu.tf',
 ] as const;
 
@@ -25,11 +29,24 @@ function isConstrained(settings: Settings): boolean {
 }
 
 export function isGmailThreadView(): boolean {
-  return !!document.querySelector('[role="main"] .h7');
+  const main = document.querySelector('[role="main"]');
+  if (!main?.querySelector('.h7')) return false;
+
+  // Split pane / search can include .h7 in preview while the list is still visible.
+  return !main.querySelector(GMAIL_LIST_ROW_SELECTOR);
 }
 
 export function isGmailListView(): boolean {
-  return !!document.querySelector('[role="main"] > .Nr');
+  if (isGmailThreadView()) return false;
+
+  const main = document.querySelector('[role="main"]');
+  if (!main) return false;
+
+  return !!(
+    main.querySelector('.Nr') ||
+    main.querySelector('.Cp') ||
+    main.querySelector('span[data-thread-id]')
+  );
 }
 
 function clearGmailHeightResets(): void {
@@ -53,7 +70,7 @@ function resetListElementLayout(el: HTMLElement): void {
     el.style.setProperty('flex', '0 0 auto', 'important');
   }
 
-  if (el.matches('[role="main"] > .Nr')) {
+  if (el.matches('[role="main"] .Nr')) {
     el.style.setProperty('flex', '0 1 auto', 'important');
   }
 
