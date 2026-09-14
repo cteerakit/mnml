@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cteerakit.github.io/mnml/sitemap-index.xml
+Sitemap: https://mnml.teerakit.com/sitemap-index.xml

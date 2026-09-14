@@ -10,12 +10,12 @@
   "scripts": {
     "dev": "pnpm --filter mnml dev",
     "dev:firefox": "pnpm --filter mnml dev:firefox",
-    "dev:web": "pnpm --filter mnml-pages dev",
+    "dev:web": "npx --yes serve docs -l 4321",
     "build": "pnpm --filter mnml build",
     "build:firefox": "pnpm --filter mnml build:firefox",
     "zip": "pnpm --filter mnml zip",
     "zip:firefox": "pnpm --filter mnml zip:firefox",
     "compile": "pnpm --filter mnml compile",
-    "preview:web": "pnpm --filter mnml-pages preview"
+    "preview:web": "npx --yes serve docs -l 4321"
   }
 }

@@ -22,7 +22,7 @@ pnpm zip
 
 ## Privacy policy
 
-See [PRIVACY.md](./PRIVACY.md) for the source text. The public policy is hosted at [https://cteerakit.github.io/mnml/privacy](https://cteerakit.github.io/mnml/privacy) — use that URL in the Chrome Web Store developer dashboard.
+See [PRIVACY.md](./PRIVACY.md) for the source text. The public policy is hosted at [https://mnml.teerakit.com/privacy/](https://mnml.teerakit.com/privacy/) — use that URL in the Chrome Web Store developer dashboard.
 
 ## Stack
 
