@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy for mnml · mnml</title>
+    <meta
+      name="description"
+      content="How the mnml Chrome extension handles your data—local settings only, no analytics, no developer servers."
+    />
+    <link rel="canonical" href="https://cteerakit.github.io/mnml/privacy/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Privacy Policy for mnml · mnml" />
+    <meta
+      property="og:description"
+      content="How the mnml Chrome extension handles your data—local settings only, no analytics, no developer servers."
+    />
+    <meta property="og:url" content="https://cteerakit.github.io/mnml/privacy/" />
+    <meta property="og:image" content="https://cteerakit.github.io/mnml/og.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../icon/32.png" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand no-underline" href="../">
+          <img src="../icon/32.png" alt="" width="32" height="32" />
+          <span>mnml</span>
+        </a>
+        <a
+          class="btn-primary no-underline"
+          href="https://chromewebstore.google.com/detail/jkbikdenghbgmceehglljbbnhfalkcpg"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img src="../chrome-web-store.svg" alt="" width="20" height="18" />
+          Add to Chrome
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <article class="prose container">
+        <header>
+          <h1>Privacy Policy for mnml</h1>
+          <p class="updated">Last updated: May 25, 2026</p>
+        </header>
+
+        <div class="prose-body">
+          <p>
+            This privacy policy describes how the <strong>mnml</strong> browser extension ("mnml",
+            "the extension", "we") handles information when you install and use it. mnml is
+            developed by the publisher listed on the
+            <a href="https://chrome.google.com/webstore">Chrome Web Store</a> listing for this
+            extension.
+          </p>
+          <p>
+            mnml is <strong>not</strong> affiliated with, endorsed by, or sponsored by Google.
+            Gmail and YouTube are trademarks of Google LLC.
+          </p>
+
+          <h2>Summary</h2>
+          <ul>
+            <li>mnml only runs on <strong>Gmail</strong> (<code>mail.google.com</code>) and <strong>YouTube</strong> (<code>youtube.com</code>).</li>
+            <li>We <strong>do not</strong> read your email, messages, watch history, or page content for storage or transmission to the developer.</li>
+            <li>We <strong>do not</strong> sell data or use advertising or analytics SDKs.</li>
+            <li>We <strong>do not</strong> send data to servers operated by the mnml developer.</li>
+            <li>The extension stores <strong>your settings</strong> (which UI hides are on or off) using Chrome's extension storage APIs, which may sync through your Google account when Chrome Sync is enabled.</li>
+          </ul>
+
+          <h2>What data we collect</h2>
+          <p>mnml collects only <strong>configuration data</strong> you set in the extension:</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Examples</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Global preference</td>
+                <td>Whether mnml is enabled</td>
+                <td>Turn all hides on or off</td>
+              </tr>
+              <tr>
+                <td>Gmail preferences</td>
+                <td>Toggle states (e.g. hide logo, minimal search bar, content width)</td>
+                <td>Apply your chosen Gmail layout</td>
+              </tr>
+              <tr>
+                <td>YouTube preferences</td>
+                <td>Toggle states (e.g. hide Shorts, hide sidebar until hover)</td>
+                <td>Apply your chosen YouTube layout</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>We do <strong>not</strong> collect:</p>
+          <ul>
+            <li>Email content, subjects, senders, or attachments</li>
+            <li>YouTube watch history, subscriptions, comments you write, or recommendations</li>
+            <li>Passwords, payment information, or government identifiers</li>
+            <li>General browsing history outside the host sites listed above</li>
+            <li>Precise location, contacts, or microphone/camera data</li>
+          </ul>
+
+          <h2>How data is stored and processed</h2>
+          <h3>On your device</h3>
+          <p>
+            Settings are stored with the Chrome extension API <code>chrome.storage.sync</code> under
+            the key <code>mnml_settings</code>. Chrome may also keep a local copy as part of normal
+            extension storage behavior.
+          </p>
+          <h3>Sync via Google (Chrome Sync)</h3>
+          <p>
+            If you are signed into Chrome and have <strong>Chrome Sync</strong> turned on, Google may
+            sync your extension settings across your signed-in devices according to
+            <a href="https://policies.google.com/privacy">Google's privacy policy</a>. That sync is
+            provided by <strong>Google</strong>, not by the mnml developer. We do not operate a
+            separate cloud account or backend for your settings.
+          </p>
+          <h3>What happens on Gmail and YouTube</h3>
+          <p>To apply your choices, mnml injects CSS and scripts <strong>only</strong> on:</p>
+          <ul>
+            <li><code>https://mail.google.com/*</code></li>
+            <li><code>https://www.youtube.com/*</code></li>
+          </ul>
+          <p>
+            Those scripts read the current page's structure (DOM) in your browser to show or hide UI
+            elements. That processing happens <strong>locally in your browser</strong> and is not
+            uploaded to the mnml developer.
+          </p>
+
+          <h2>Third-party services</h2>
+          <p>
+            mnml does <strong>not</strong> embed third-party analytics, advertising, crash reporting,
+            or authentication services controlled by the developer.
+          </p>
+          <p>The extension relies on:</p>
+          <ul>
+            <li><strong>Google Chrome</strong> (extension platform, storage, side panel)</li>
+            <li><strong>Gmail and YouTube</strong> (websites where mnml runs)</li>
+          </ul>
+          <p>Use of those products is governed by Google's terms and policies.</p>
+
+          <h2>Data sharing</h2>
+          <p>We <strong>do not</strong> sell, rent, or trade your data.</p>
+          <p>
+            We <strong>do not</strong> share your settings with other companies or individuals except
+            as described above (local processing on your device and optional sync through Google
+            Chrome when you use Chrome Sync).
+          </p>
+
+          <h2>Data retention and deletion</h2>
+          <p>
+            Settings remain until you change them, disable the extension, remove the extension, or
+            clear extension data.
+          </p>
+          <p>You can delete mnml's stored data by:</p>
+          <ol>
+            <li>Turning off <strong>Enable mnml</strong> in the side panel (stops applying hides; settings remain stored), or</li>
+            <li>Removing mnml from <code>chrome://extensions</code>, or</li>
+            <li>Clearing site/extension data for mnml in Chrome settings, or</li>
+            <li>Disabling or signing out of Chrome Sync (affects synced copies on other devices per Google's behavior)</li>
+          </ol>
+          <p>Uninstalling the extension removes its local data from that browser profile.</p>
+
+          <h2>Children's privacy</h2>
+          <p>
+            mnml is not directed at children under 13, and we do not knowingly collect personal
+            information from children.
+          </p>
+
+          <h2>Security</h2>
+          <p>
+            Because settings stay in Chrome's extension storage (and optionally Google's sync
+            infrastructure), security depends on your device and Google account protections. Keep your
+            OS and browser updated and use a strong Google account password if you use Chrome Sync.
+          </p>
+
+          <h2>Changes to this policy</h2>
+          <p>
+            We may update this policy when mnml's behavior or legal requirements change. The
+            <strong>Last updated</strong> date at the top will change when we do. Continued use of the
+            extension after an update means you accept the revised policy. For material changes, we
+            may also update the Chrome Web Store listing description.
+          </p>
+
+          <h2>Your rights</h2>
+          <p>
+            Depending on where you live, you may have rights to access, correct, or delete personal
+            data. For mnml, your settings are under your control via the extension UI and Chrome as
+            described in <strong>Data retention and deletion</strong>. Contact us if you need help
+            exercising those rights.
+          </p>
+
+          <h2>Contact</h2>
+          <p>
+            For privacy questions or requests about mnml, contact the developer using the
+            <strong>support email</strong> shown on the Chrome Web Store listing for mnml.
+          </p>
+          <p>
+            If the source code is published in a public repository, you may also report privacy
+            concerns through that repository's issue tracker.
+          </p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-top">
+          <div>
+            <p class="footer-name">mnml</p>
+            <p class="footer-tagline">Less clutter on Gmail and YouTube</p>
+          </div>
+          <a
+            class="btn-primary no-underline"
+            href="https://chromewebstore.google.com/detail/jkbikdenghbgmceehglljbbnhfalkcpg"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <img src="../chrome-web-store.svg" alt="" width="20" height="18" />
+            Add to Chrome
+          </a>
+        </div>
+        <div class="footer-links">
+          <a class="no-underline" href="./">Privacy policy</a>
+          <a class="no-underline" href="https://mnml.featurebase.app/" rel="noopener noreferrer" target="_blank">Feedback</a>
+          <a class="no-underline" href="https://github.com/cteerakit/mnml" rel="noopener noreferrer">GitHub</a>
+          <span>© 2026 mnml</span>
+        </div>
+        <p class="footer-disclaimer" style="margin-top: 2rem">
+          mnml is not affiliated with, endorsed by, or sponsored by Google. Gmail and YouTube are
+          trademarks of Google LLC.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

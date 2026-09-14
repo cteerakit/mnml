@@ -13,7 +13,6 @@
     "dev:web": "pnpm --filter mnml-pages dev",
     "build": "pnpm --filter mnml build",
     "build:firefox": "pnpm --filter mnml build:firefox",
-    "build:web": "pnpm --filter mnml-pages build",
     "zip": "pnpm --filter mnml zip",
     "zip:firefox": "pnpm --filter mnml zip:firefox",
     "compile": "pnpm --filter mnml compile",
