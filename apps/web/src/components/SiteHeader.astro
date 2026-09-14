@@ -1,13 +1,14 @@
 ---
 import { siteConfig } from '../config/site';
+import { withBase } from '../lib/utils';
 import CtaButton from './CtaButton.astro';
 ---
 
 <header class="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-sm">
   <div class="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
-    <a href="/" class="flex items-center gap-2.5 no-underline hover:no-underline">
+    <a href={withBase()} class="flex items-center gap-2.5 no-underline hover:no-underline">
       <img
-        src="/icon/32.png"
+        src={withBase('icon/32.png')}
         alt=""
         width={32}
         height={32}

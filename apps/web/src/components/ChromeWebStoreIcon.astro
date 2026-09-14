@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../lib/utils';
+
 interface Props {
   class?: string;
 }
@@ -7,7 +9,7 @@ const { class: className = 'size-5 shrink-0' } = Astro.props;
 ---
 
 <img
-  src="/chrome-web-store.svg"
+  src={withBase('chrome-web-store.svg')}
   alt=""
   width={20}
   height={18}

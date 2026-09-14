@@ -5,7 +5,7 @@ Monorepo for **mnml** — a Chrome extension that hides distracting UI on Gmail,
 | Package | Path | Description |
 |---------|------|-------------|
 | Extension | [`apps/extension`](apps/extension) | WXT + React Chrome extension |
-| Web | [`apps/web`](apps/web) | Astro marketing site (Cloudflare Pages) |
+| Web | [`apps/web`](apps/web) | Astro marketing site (GitHub Pages) |
 
 ## Setup
 
@@ -23,11 +23,13 @@ pnpm install
 pnpm dev
 ```
 
-**Marketing site** ([http://localhost:4321](http://localhost:4321)):
+**Marketing site** ([http://localhost:4321/mnml/](http://localhost:4321/mnml/)):
 
 ```bash
 pnpm dev:web
 ```
+
+The site uses `base: '/mnml'` so local URLs match GitHub Pages (`https://cteerakit.github.io/mnml/`).
 
 ## Build
 
@@ -41,15 +43,15 @@ pnpm compile          # extension TypeScript check
 
 ## Privacy policy
 
-The public privacy policy lives at [https://mnml.pages.dev/privacy](https://mnml.pages.dev/privacy). Source: [`apps/web/src/content/privacy/policy.md`](apps/web/src/content/privacy/policy.md) (sync with [`apps/extension/PRIVACY.md`](apps/extension/PRIVACY.md)).
+The public privacy policy lives at [https://cteerakit.github.io/mnml/privacy](https://cteerakit.github.io/mnml/privacy). Source: [`apps/web/src/content/privacy/policy.md`](apps/web/src/content/privacy/policy.md) (sync with [`apps/extension/PRIVACY.md`](apps/extension/PRIVACY.md)).
 
-## Deploy (Cloudflare Pages)
+## Deploy (GitHub Pages)
 
-Point the Pages project at this repository:
+Pushes to `main` that touch the site (or this workflow) run [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) and publish to [https://cteerakit.github.io/mnml/](https://cteerakit.github.io/mnml/).
 
-- **Build command:** `pnpm --filter mnml-pages build`
-- **Build output directory:** `apps/web/dist`
-- **Node version:** 22 or later
-- Set `SITE` and `PUBLIC_*` env vars (see [`apps/web/.env.example`](apps/web/.env.example))
+One-time setup in the GitHub repo:
+
+1. **Settings → Pages → Source:** GitHub Actions
+2. Optional: set `SITE` / `PUBLIC_*` as Actions variables if they differ from the workflow defaults (see [`apps/web/.env.example`](apps/web/.env.example))
 
 See [`apps/web/README.md`](apps/web/README.md) for content maintenance and env var details.

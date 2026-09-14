@@ -6,11 +6,13 @@ import sitemap from '@astrojs/sitemap';
 
 import react from '@astrojs/react';
 
-const site = process.env.SITE ?? 'https://mnml.pages.dev';
+const site = process.env.SITE ?? 'https://cteerakit.github.io';
 
 // https://astro.build/config
 export default defineConfig({
   site,
+  // GitHub Pages project site: https://cteerakit.github.io/mnml/
+  base: '/mnml',
   output: 'static',
   vite: {
     resolve: {

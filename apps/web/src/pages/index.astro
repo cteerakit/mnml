@@ -4,6 +4,7 @@ import CtaButton from '../components/CtaButton.astro';
 import { PlatformFeaturesTabs } from '../components/PlatformFeaturesTabs';
 import JsonLd from '../components/JsonLd.astro';
 import { siteConfig, comingSoonPlatforms } from '../config/site';
+import { withBase } from '../lib/utils';
 import {
   gmailFeatures,
   howItWorksSteps,
@@ -24,7 +25,7 @@ const pageTitle = 'mnml — A calmer Gmail and YouTube';
     <div class="flex flex-col items-start gap-8">
       <div class="flex items-center gap-3">
         <img
-          src="/icon/128.png"
+          src={withBase('icon/128.png')}
           alt=""
           width={64}
           height={64}
@@ -88,7 +89,7 @@ const pageTitle = 'mnml — A calmer Gmail and YouTube';
         We do not sell your information or track you. Your settings are saved on your computer and
         can sync across your devices if you use Chrome&apos;s sync.
       </p>
-      <a href="/privacy" class="mt-6 inline-block text-sm font-medium no-underline hover:underline">
+      <a href={withBase('privacy')} class="mt-6 inline-block text-sm font-medium no-underline hover:underline">
         Read the full privacy policy →
       </a>
     </div>

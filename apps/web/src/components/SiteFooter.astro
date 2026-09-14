@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from '../config/site';
+import { withBase } from '../lib/utils';
 import CtaButton from './CtaButton.astro';
 
 const year = new Date().getFullYear();
@@ -15,7 +16,7 @@ const year = new Date().getFullYear();
       <CtaButton />
     </div>
     <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-      <a href="/privacy" class="no-underline hover:text-foreground">Privacy policy</a>
+      <a href={withBase('privacy')} class="no-underline hover:text-foreground">Privacy policy</a>
       <a
         href={siteConfig.feedbackUrl}
         class="no-underline hover:text-foreground"

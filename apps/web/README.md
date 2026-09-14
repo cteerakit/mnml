@@ -1,15 +1,17 @@
 # mnml-pages
 
-Static marketing site and privacy policy for the [mnml](https://github.com/cteerakit/mnml) Chrome extension. Built with [Astro](https://astro.build) and deployed to [Cloudflare Pages](https://pages.cloudflare.com/).
+Static marketing site and privacy policy for the [mnml](https://github.com/cteerakit/mnml) Chrome extension. Built with [Astro](https://astro.build) and deployed to [GitHub Pages](https://pages.github.com/).
 
 Part of the [mnml monorepo](../..). Install dependencies from the repo root (`pnpm install`).
+
+Live site: [https://cteerakit.github.io/mnml/](https://cteerakit.github.io/mnml/)
 
 ## Pages
 
 | Route | Description |
 |-------|-------------|
-| `/` | Single-page landing (Gmail, YouTube, privacy teaser) |
-| `/privacy` | Chrome Web Store privacy policy |
+| `/mnml/` | Single-page landing (Gmail, YouTube, privacy teaser) |
+| `/mnml/privacy` | Chrome Web Store privacy policy |
 
 ## Development
 
@@ -25,7 +27,7 @@ Or from this directory:
 pnpm dev
 ```
 
-Open [http://localhost:4321](http://localhost:4321).
+Open [http://localhost:4321/mnml/](http://localhost:4321/mnml/). The `/mnml` prefix matches the GitHub Pages project URL.
 
 ## Build
 
@@ -40,21 +42,21 @@ Output is written to `dist/`.
 
 ## Environment variables
 
-Copy `.env.example` to `.env` for local builds, and set the same variables in Cloudflare Pages → Settings → Environment variables:
+Copy `.env.example` to `.env` for local builds. Production values are set in [`.github/workflows/deploy.yml`](../../.github/workflows/deploy.yml).
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `SITE` | Yes (production) | Canonical site URL, e.g. `https://mnml.example` |
+| `SITE` | Yes (production) | Canonical origin only, `https://cteerakit.github.io` (do not include `/mnml`) |
 | `PUBLIC_CHROME_STORE_URL` | No | Chrome Web Store listing URL for the “Add to Chrome” button |
 | `PUBLIC_GITHUB_URL` | No | Optional GitHub link in the footer |
 
-## Deploy to Cloudflare Pages
+`base` is `/mnml` in [`astro.config.mjs`](astro.config.mjs) so assets and routes work on the project Pages URL.
 
-1. Connect the **mnml** monorepo (not the archived mnml-pages repo).
-2. **Build command:** `pnpm --filter mnml-pages build`
-3. **Build output directory:** `apps/web/dist`
-4. **Node version:** 22 or later (see root `package.json` `engines`)
-5. Set `SITE` and `PUBLIC_*` variables for the Production environment.
+## Deploy to GitHub Pages
+
+1. Push to `main` (or run the **Deploy to GitHub Pages** workflow manually).
+2. One-time: repo **Settings → Pages → Source:** GitHub Actions.
+3. Site URL: [https://cteerakit.github.io/mnml/](https://cteerakit.github.io/mnml/)
 
 ## Content maintenance
 
