@@ -14,12 +14,6 @@
     "compile": "tsc --noEmit",
     "postinstall": "wxt prepare"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "spawn-sync"
-    ]
-  },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
     "@radix-ui/react-label": "^2.1.8",

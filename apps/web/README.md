@@ -1,6 +1,8 @@
 # mnml-pages
 
-Static marketing site and privacy policy for the [mnml](https://github.com/) Chrome extension. Built with [Astro](https://astro.build) and deployed to [Cloudflare Pages](https://pages.cloudflare.com/).
+Static marketing site and privacy policy for the [mnml](https://github.com/cteerakit/mnml) Chrome extension. Built with [Astro](https://astro.build) and deployed to [Cloudflare Pages](https://pages.cloudflare.com/).
+
+Part of the [mnml monorepo](../..). Install dependencies from the repo root (`pnpm install`).
 
 ## Pages
 
@@ -11,8 +13,15 @@ Static marketing site and privacy policy for the [mnml](https://github.com/) Chr
 
 ## Development
 
+From the repo root:
+
 ```bash
-pnpm install
+pnpm dev:web
+```
+
+Or from this directory:
+
+```bash
 pnpm dev
 ```
 
@@ -20,9 +29,11 @@ Open [http://localhost:4321](http://localhost:4321).
 
 ## Build
 
+From the repo root:
+
 ```bash
-pnpm build
-pnpm preview
+pnpm build:web
+pnpm preview:web
 ```
 
 Output is written to `dist/`.
@@ -39,14 +50,14 @@ Copy `.env.example` to `.env` for local builds, and set the same variables in Cl
 
 ## Deploy to Cloudflare Pages
 
-1. Create a Cloudflare Pages project connected to this repository.
-2. **Build command:** `pnpm build`
-3. **Build output directory:** `dist`
-4. **Node version:** 22 or later (see `package.json` `engines`)
+1. Connect the **mnml** monorepo (not the archived mnml-pages repo).
+2. **Build command:** `pnpm --filter mnml-pages build`
+3. **Build output directory:** `apps/web/dist`
+4. **Node version:** 22 or later (see root `package.json` `engines`)
 5. Set `SITE` and `PUBLIC_*` variables for the Production environment.
 
 ## Content maintenance
 
-- **Features:** Update [`src/data/features.ts`](src/data/features.ts) when toggles change in the extension ([`PlatformView.tsx`](../mnml/entrypoints/sidepanel/views/PlatformView.tsx)).
-- **Privacy:** Update [`src/content/privacy/policy.md`](src/content/privacy/policy.md) when [`PRIVACY.md`](../mnml/PRIVACY.md) changes.
-- **Icons:** Copy from `mnml/.output/chrome-mv3/icon/` into `public/icon/` after rebuilding the extension.
+- **Features:** Update [`src/data/features.ts`](src/data/features.ts) when toggles change in the extension ([`PlatformView.tsx`](../extension/entrypoints/sidepanel/views/PlatformView.tsx)).
+- **Privacy:** Update [`src/content/privacy/policy.md`](src/content/privacy/policy.md) when [`PRIVACY.md`](../extension/PRIVACY.md) changes.
+- **Icons:** Copy from `../extension/.output/chrome-mv3/icon/` into `public/icon/` after rebuilding the extension.

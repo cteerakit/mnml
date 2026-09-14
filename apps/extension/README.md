@@ -22,7 +22,7 @@ pnpm zip
 
 ## Privacy policy
 
-See [PRIVACY.md](./PRIVACY.md) for the Chrome Web Store privacy policy. Host it at a public URL (for example [GitHub Pages](https://docs.github.com/en/pages)) and use that link in the developer dashboard.
+See [PRIVACY.md](./PRIVACY.md) for the source text. The public policy is hosted at [https://mnml.pages.dev/privacy](https://mnml.pages.dev/privacy) — use that URL in the Chrome Web Store developer dashboard.
 
 ## Stack
 

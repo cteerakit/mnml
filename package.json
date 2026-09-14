@@ -1,0 +1,22 @@
+{
+  "name": "mnml-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "mnml Chrome extension and marketing site",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter mnml dev",
+    "dev:firefox": "pnpm --filter mnml dev:firefox",
+    "dev:web": "pnpm --filter mnml-pages dev",
+    "build": "pnpm --filter mnml build",
+    "build:firefox": "pnpm --filter mnml build:firefox",
+    "build:web": "pnpm --filter mnml-pages build",
+    "zip": "pnpm --filter mnml zip",
+    "zip:firefox": "pnpm --filter mnml zip:firefox",
+    "compile": "pnpm --filter mnml compile",
+    "preview:web": "pnpm --filter mnml-pages preview"
+  }
+}

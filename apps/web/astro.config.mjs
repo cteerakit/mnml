@@ -13,6 +13,11 @@ export default defineConfig({
   site,
   output: 'static',
   vite: {
+    resolve: {
+      // Required when Vite 8 is hoisted from the extension workspace: @tailwindcss/vite
+      // spreads resolve options and Vite 8 rejects configs without `tsconfigPaths`.
+      tsconfigPaths: true,
+    },
     plugins: [tailwindcss()],
   },
   integrations: [sitemap(), react()],
