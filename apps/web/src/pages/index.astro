@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaButton from '../components/CtaButton.astro';
+import { PlatformFeaturesTabs } from '../components/PlatformFeaturesTabs';
+import JsonLd from '../components/JsonLd.astro';
+import { siteConfig, comingSoonPlatforms } from '../config/site';
+import {
+  gmailFeatures,
+  howItWorksSteps,
+  youtubeFeatures,
+} from '../data/features';
+
+const pageTitle = 'mnml — A calmer Gmail and YouTube';
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={siteConfig.description}
+  path="/"
+>
+  <JsonLd slot="head" />
+
+  <section class="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24">
+    <div class="flex flex-col items-start gap-8">
+      <div class="flex items-center gap-3">
+        <img
+          src="/icon/128.png"
+          alt=""
+          width={64}
+          height={64}
+          class="size-16 rounded-xl"
+          fetchpriority="high"
+        />
+        <div>
+          <h1 class="text-4xl font-semibold tracking-tight sm:text-5xl">
+            {siteConfig.name}
+          </h1>
+          <p class="mt-1 text-sm font-medium text-muted-foreground">{siteConfig.tagline}</p>
+        </div>
+      </div>
+      <p class="max-w-2xl text-lg text-muted-foreground leading-relaxed">
+        Hide the menus, buttons, and extras that get in your way on Gmail and YouTube. Turn
+        options on or off from one simple panel—nothing leaves your computer.
+      </p>
+      <CtaButton />
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-muted/20">
+    <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+      <h2 class="text-2xl font-semibold tracking-tight">How it works</h2>
+      <p class="mt-2 max-w-2xl text-muted-foreground">
+        Three steps to a calmer inbox and feed.
+      </p>
+      <ol class="mt-10 grid gap-6 sm:grid-cols-3">
+        {
+          howItWorksSteps.map((item) => (
+            <li class="rounded-xl border border-border bg-card p-6">
+              <span class="text-xs font-semibold text-muted-foreground">Step {item.step}</span>
+              <h3 class="mt-2 text-base font-semibold">{item.title}</h3>
+              <p class="mt-2 text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section id="features" class="scroll-mt-20 border-t border-border bg-muted/20">
+    <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+      <h2 class="text-2xl font-semibold tracking-tight">Gmail &amp; YouTube</h2>
+      <p class="mt-2 max-w-2xl text-muted-foreground">
+        See everything you can turn off for Gmail and YouTube. You control it all from mnml.
+      </p>
+      <PlatformFeaturesTabs
+        client:visible
+        gmailFeatures={gmailFeatures}
+        youtubeFeatures={youtubeFeatures}
+      />
+    </div>
+  </section>
+
+  <section class="border-t border-border">
+    <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+      <h2 class="text-2xl font-semibold tracking-tight">Your privacy matters</h2>
+      <p class="mt-2 max-w-2xl text-muted-foreground leading-relaxed">
+        mnml only works on Gmail and YouTube. We never read your emails, chats, or what you watch.
+        We do not sell your information or track you. Your settings are saved on your computer and
+        can sync across your devices if you use Chrome&apos;s sync.
+      </p>
+      <a href="/privacy" class="mt-6 inline-block text-sm font-medium no-underline hover:underline">
+        Read the full privacy policy →
+      </a>
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-muted/20">
+    <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+      <h2 class="text-2xl font-semibold tracking-tight">Coming soon</h2>
+      <p class="mt-2 text-muted-foreground">More sites are coming later.</p>
+      <ul class="mt-6 flex flex-wrap gap-2">
+        {
+          comingSoonPlatforms.map((platform) => (
+            <li>
+              <span class="inline-flex rounded-full border border-border bg-background px-3 py-1 text-sm text-muted-foreground">
+                {platform}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

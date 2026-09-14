@@ -1,0 +1,30 @@
+---
+import '../styles/global.css';
+import SeoHead from '../components/SeoHead.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  ogType?: 'website' | 'article';
+}
+
+const { title, description, path = '', ogType = 'website' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SeoHead title={title} description={description} path={path} ogType={ogType} />
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <SiteHeader />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

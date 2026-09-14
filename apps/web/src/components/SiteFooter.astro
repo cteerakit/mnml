@@ -1,0 +1,45 @@
+---
+import { siteConfig } from '../config/site';
+import CtaButton from './CtaButton.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-border bg-muted/30">
+  <div class="mx-auto flex max-w-5xl flex-col gap-8 px-4 py-12 sm:px-6">
+    <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+      <div>
+        <p class="text-sm font-semibold">{siteConfig.name}</p>
+        <p class="mt-1 text-sm text-muted-foreground">{siteConfig.tagline}</p>
+      </div>
+      <CtaButton />
+    </div>
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+      <a href="/privacy" class="no-underline hover:text-foreground">Privacy policy</a>
+      <a
+        href={siteConfig.feedbackUrl}
+        class="no-underline hover:text-foreground"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Feedback
+      </a>
+      {
+        siteConfig.githubUrl && (
+          <a
+            href={siteConfig.githubUrl}
+            class="no-underline hover:text-foreground"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+        )
+      }
+      <span>© {year} mnml</span>
+    </div>
+    <p class="text-xs text-muted-foreground">
+      mnml is not affiliated with, endorsed by, or sponsored by Google. Gmail and YouTube are
+      trademarks of Google LLC.
+    </p>
+  </div>
+</footer>

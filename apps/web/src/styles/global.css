@@ -1,0 +1,101 @@
+@import 'tailwindcss';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --border: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: Inter, system-ui, sans-serif;
+  }
+
+  a {
+    @apply text-foreground underline-offset-4 hover:underline;
+  }
+}
+
+@layer components {
+  .prose-mnml h2 {
+    @apply mt-10 scroll-mt-24 text-xl font-semibold tracking-tight first:mt-0;
+  }
+
+  .prose-mnml h3 {
+    @apply mt-6 text-lg font-semibold tracking-tight;
+  }
+
+  .prose-mnml p {
+    @apply mt-4 text-muted-foreground leading-relaxed;
+  }
+
+  .prose-mnml ul {
+    @apply mt-4 list-disc space-y-2 pl-6 text-muted-foreground;
+  }
+
+  .prose-mnml ol {
+    @apply mt-4 list-decimal space-y-2 pl-6 text-muted-foreground;
+  }
+
+  .prose-mnml table {
+    @apply mt-6 w-full border-collapse text-sm;
+  }
+
+  .prose-mnml th,
+  .prose-mnml td {
+    @apply border border-border px-3 py-2 text-left align-top;
+  }
+
+  .prose-mnml th {
+    @apply bg-muted font-medium text-foreground;
+  }
+
+  .prose-mnml strong {
+    @apply font-semibold text-foreground;
+  }
+}

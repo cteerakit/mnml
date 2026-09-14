@@ -1,0 +1,19 @@
+---
+import { siteConfig } from '../config/site';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: siteConfig.name,
+  description: siteConfig.description,
+  applicationCategory: 'BrowserApplication',
+  operatingSystem: 'Chrome',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
