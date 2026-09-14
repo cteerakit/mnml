@@ -2,6 +2,7 @@
   "name": "mnml",
   "description": "Hide distracting UI on Gmail, YouTube, and more.",
   "private": true,
+  "license": "MIT",
   "version": "0.1.0",
   "type": "module",
   "scripts": {

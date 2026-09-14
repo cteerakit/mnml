@@ -57,3 +57,7 @@ In the repo: **Settings → Pages → Source: Deploy from a branch**
 Push changes under `docs/` to publish. Live site: [https://mnml.teerakit.com/](https://mnml.teerakit.com/)
 
 See [`docs/README.md`](docs/README.md) for content maintenance.
+
+## License
+
+[MIT](LICENSE)
