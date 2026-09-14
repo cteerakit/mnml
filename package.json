@@ -1,7 +1,7 @@
 {
   "name": "mnml-monorepo",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "mnml Chrome extension and marketing site",
   "type": "module",
   "engines": {

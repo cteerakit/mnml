@@ -1,6 +1,7 @@
 import { initPlatform } from '@/lib/apply';
 import { syncGmailContentWidthLayout } from '@/lib/gmail-content-width';
 import { syncGmailFloatingCompose } from '@/lib/gmail-floating-compose';
+import { syncGmailSidePanel } from '@/lib/gmail-side-panel';
 import { syncGmailTopRightIcons } from '@/lib/gmail-top-right-icons';
 
 export default defineContentScript({
@@ -10,6 +11,7 @@ export default defineContentScript({
     await initPlatform('gmail', ctx, {
       afterApply: async (settings) => {
         syncGmailContentWidthLayout(settings);
+        await syncGmailSidePanel(settings);
         await syncGmailTopRightIcons(settings);
         await syncGmailFloatingCompose(settings);
       },

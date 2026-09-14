@@ -78,17 +78,22 @@ html[data-mnml-gmail-listToolbar] [role="main"] [gh="tm"]:focus-within > * {
 }
 
 html[data-mnml-gmail-sidePanel] [role="complementary"][aria-label="Side panel"],
-html[data-mnml-gmail-sidePanel] [aria-label="Show side panel"] {
+html[data-mnml-gmail-sidePanel] .companion-collapser-button-container,
+html[data-mnml-gmail-sidePanel] [aria-label="Show side panel"],
+html[data-mnml-gmail-sidePanel] [aria-label="Hide side panel"],
+html[data-mnml-gmail-sidePanel] [data-tooltip="Show side panel"],
+html[data-mnml-gmail-sidePanel] [data-tooltip="Hide side panel"] {
   display: none !important;
 }
 
 html[data-mnml-gmail-searchBar] form[role="search"],
-html[data-mnml-gmail-searchBar] input[aria-label="Search mail"] {
+html[data-mnml-gmail-searchBar] input[aria-label="Search mail"],
+html[data-mnml-gmail-searchBar] input[aria-label="Ask Gmail"] {
   display: none !important;
 }
 
 html[data-mnml-gmail-minimalSearchBar] {
-  --mnml-gmail-search-collapsed-width: 200px;
+  --mnml-gmail-search-collapsed-width: 280px;
   --mnml-gmail-search-expanded-max-width: 720px;
 }
 
@@ -116,8 +121,17 @@ html[data-mnml-gmail-minimalSearchBar] form[role="search"]:not(:hover):not(:focu
 
 html[data-mnml-gmail-minimalSearchBar]
   form[role="search"]:not(:hover):not(:focus-within)
-  input[aria-label="Search mail"]::placeholder {
+  input::placeholder {
+  color: transparent !important;
   opacity: 0 !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+html[data-mnml-gmail-minimalSearchBar]
+  form[role="search"]:not(:hover):not(:focus-within)
+  input:placeholder-shown {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
 }
 
 html[data-mnml-gmail-minimalSearchBar] form[role="search"]:hover,
@@ -127,44 +141,64 @@ html[data-mnml-gmail-minimalSearchBar] form[role="search"]:focus-within {
   opacity: 1 !important;
 }
 
-html[data-mnml-gmail-topRightIcons]:not([data-mnml-gmail-topRightIcons-expanded])
-  .gb_v.gb_we.bGJ > :not(#mnml-top-right-toggle-wrap),
-html[data-mnml-gmail-topRightIcons]:not([data-mnml-gmail-topRightIcons-expanded])
-  a[aria-label="Google apps"],
-html[data-mnml-gmail-topRightIcons]:not([data-mnml-gmail-topRightIcons-expanded])
-  div.gb_z:has(a[aria-label^="Google Account"]),
-html[data-mnml-gmail-topRightIcons]:not([data-mnml-gmail-topRightIcons-expanded])
-  a[aria-label^="Google Account"] {
-  display: none !important;
-}
-
-html[data-mnml-gmail-topRightIcons] .gb_v.gb_we.bGJ {
-  display: flex !important;
-  align-items: center;
-}
-
-/* Match native .gb_xe hit target (24px icon + 8px padding, content-box). */
-html[data-mnml-gmail-topRightIcons] a.mnml-top-right-toggle {
-  box-sizing: content-box !important;
-  display: inline-block !important;
-  line-height: 0 !important;
-  opacity: 0.35 !important;
+html[data-mnml-gmail-topRightIcons]
+  [data-mnml-gmail-top-right-cluster]
+  > :not([data-mnml-gmail-account]),
+html[data-mnml-gmail-topRightIcons]
+  .gb_v.gb_we.bGJ
+  > :not([data-mnml-gmail-account]):not(:has(a[aria-label^="Google Account"])):not(
+    a[aria-label^="Google Account"]
+  ),
+html[data-mnml-gmail-topRightIcons] [data-mnml-gmail-top-right-icon],
+html[data-mnml-gmail-topRightIcons] [data-mnml-gmail-top-right-hover] a[aria-label="Google apps"],
+html[data-mnml-gmail-topRightIcons] [data-mnml-gmail-top-right-hover] #gbwa,
+html[data-mnml-gmail-topRightIcons] [aria-label="Studio"],
+html[data-mnml-gmail-topRightIcons] [id^="gsc-gab-"],
+html[data-mnml-gmail-topRightIcons]
+  div:has(> span[data-is-tooltip-wrapper] > [aria-label="Ask Gemini"]) {
+  opacity: 0 !important;
   transition: opacity 0.15s ease;
 }
 
-html[data-mnml-gmail-topRightIcons] a.mnml-top-right-toggle:hover,
-html[data-mnml-gmail-topRightIcons] a.mnml-top-right-toggle:focus,
-html[data-mnml-gmail-topRightIcons] a.mnml-top-right-toggle:focus-visible {
+html[data-mnml-gmail-topRightIcons]:has(
+    :is(
+        [data-mnml-gmail-top-right-hover],
+        [data-mnml-gmail-top-right-cluster],
+        [data-mnml-gmail-account],
+        [data-mnml-gmail-top-right-icon]
+      ):is(:hover, :focus-within)
+  )
+  [data-mnml-gmail-top-right-cluster]
+  > :not([data-mnml-gmail-account]),
+html[data-mnml-gmail-topRightIcons]:has(
+    :is(
+        [data-mnml-gmail-top-right-hover],
+        [data-mnml-gmail-top-right-cluster],
+        [data-mnml-gmail-account],
+        [data-mnml-gmail-top-right-icon]
+      ):is(:hover, :focus-within)
+  )
+  [data-mnml-gmail-top-right-icon],
+html[data-mnml-gmail-topRightIcons]:has(
+    :is(
+        [data-mnml-gmail-top-right-hover],
+        [data-mnml-gmail-top-right-cluster],
+        [data-mnml-gmail-account],
+        [data-mnml-gmail-top-right-icon]
+      ):is(:hover, :focus-within)
+  )
+  :is(
+    a[aria-label="Google apps"],
+    #gbwa,
+    [aria-label="Studio"],
+    [id^="gsc-gab-"],
+    div:has(> span[data-is-tooltip-wrapper] > [aria-label="Ask Gemini"])
+  ),
+html[data-mnml-gmail-topRightIcons] .gb_v.gb_we.bGJ:is(:hover, :focus-within)
+  > :not([data-mnml-gmail-account]):not(:has(a[aria-label^="Google Account"])):not(
+    a[aria-label^="Google Account"]
+  ) {
   opacity: 1 !important;
-}
-
-html[data-mnml-gmail-topRightIcons] a.mnml-top-right-toggle svg.t7 {
-  display: inline !important;
-  flex-shrink: 0 !important;
-  width: 24px !important;
-  height: 24px !important;
-  min-width: 24px !important;
-  min-height: 24px !important;
 }
 
 html[data-mnml-gmail-footer] .yg,

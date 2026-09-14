@@ -1,4 +1,8 @@
 import {
+  Alert,
+  AlertDescription,
+} from '@/components/ui/alert';
+import {
   Card,
   CardContent,
   CardDescription,
@@ -28,9 +32,11 @@ export function GmailView() {
       </div>
 
       {!settings.global.enabled && (
-        <div className="rounded-lg border border-dashed bg-muted/40 px-4 py-3 text-sm text-muted-foreground">
-          mnml is disabled. Enable it under General to apply these options.
-        </div>
+        <Alert>
+          <AlertDescription>
+            mnml is disabled. Enable it under General to apply these options.
+          </AlertDescription>
+        </Alert>
       )}
 
       <Card>

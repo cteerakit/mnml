@@ -1,9 +1,12 @@
 import { Label } from '@/components/ui/label';
 import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from '@/components/ui/toggle-group';
+import {
   GMAIL_CONTENT_WIDTHS,
   type GmailContentWidth,
 } from '@/lib/settings';
-import { cn } from '@/lib/utils';
 
 const WIDTH_LABELS: Record<GmailContentWidth, string> = {
   small: 'Small',
@@ -30,34 +33,29 @@ export function ContentWidthPicker({
         Limit how wide the inbox and reading pane can grow. Full uses Gmail&apos;s
         default layout.
       </p>
-      <div
-        className="grid grid-cols-4 gap-1 rounded-lg border bg-muted/40 p-1"
-        role="radiogroup"
+      <ToggleGroup
+        type="single"
+        variant="outline"
+        size="sm"
+        spacing={0}
+        value={value}
+        disabled={disabled}
+        onValueChange={(next) => {
+          if (next) onChange(next as GmailContentWidth);
+        }}
         aria-label="Limit main content width"
+        className="grid w-full grid-cols-4"
       >
-        {GMAIL_CONTENT_WIDTHS.map((width) => {
-          const selected = value === width;
-          return (
-            <button
-              key={width}
-              type="button"
-              role="radio"
-              aria-checked={selected}
-              disabled={disabled}
-              onClick={() => onChange(width)}
-              className={cn(
-                'rounded-md px-2 py-1.5 text-xs font-medium transition-colors',
-                selected
-                  ? 'bg-background text-foreground shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground',
-                disabled && 'pointer-events-none opacity-50',
-              )}
-            >
-              {WIDTH_LABELS[width]}
-            </button>
-          );
-        })}
-      </div>
+        {GMAIL_CONTENT_WIDTHS.map((width) => (
+          <ToggleGroupItem
+            key={width}
+            value={width}
+            className="w-full text-xs"
+          >
+            {WIDTH_LABELS[width]}
+          </ToggleGroupItem>
+        ))}
+      </ToggleGroup>
     </div>
   );
 }

@@ -4,117 +4,203 @@ import { getSettings } from './settings';
 const EXPANDED_ATTR = 'data-mnml-gmail-topRightIcons-expanded';
 const SESSION_KEY = 'mnml_gmail_topRightExpanded';
 const TOGGLE_WRAP_ID = 'mnml-top-right-toggle-wrap';
-const SVG_NS = 'http://www.w3.org/2000/svg';
+const CLUSTER_ATTR = 'data-mnml-gmail-top-right-cluster';
+const HOVER_ATTR = 'data-mnml-gmail-top-right-hover';
+const ACCOUNT_ATTR = 'data-mnml-gmail-account';
+const ICON_ATTR = 'data-mnml-gmail-top-right-icon';
+const ACCOUNT_SELECTOR = 'a[aria-label^="Google Account"]';
+const CLUSTER_FALLBACK = '.gb_v.gb_we.bGJ';
 
-function isExpanded(): boolean {
-  return sessionStorage.getItem(SESSION_KEY) === '1';
+const COLLAPSE_LABEL_RE =
+  /^(Google apps|Support|Settings|Studio|Ask Gemini|Gemini|Open Gemini(?: side panel)?)$/i;
+
+function findAccountLink(): HTMLElement | null {
+  return document.querySelector(ACCOUNT_SELECTOR);
 }
 
-function setExpanded(expanded: boolean): void {
-  if (expanded) {
-    sessionStorage.setItem(SESSION_KEY, '1');
-    document.documentElement.setAttribute(EXPANDED_ATTR, '');
-  } else {
-    sessionStorage.removeItem(SESSION_KEY);
-    document.documentElement.removeAttribute(EXPANDED_ATTR);
+function findAccountWrap(account: HTMLElement | null): HTMLElement | null {
+  return account?.parentElement ?? null;
+}
+
+function findCluster(accountWrap: HTMLElement | null): HTMLElement | null {
+  const fallback = document.querySelector(CLUSTER_FALLBACK) as HTMLElement | null;
+  const candidate = accountWrap?.parentElement ?? fallback;
+  if (!candidate) return fallback;
+  if (candidate.querySelector('form[role="search"]')) {
+    return accountWrap ?? fallback;
   }
+  return candidate;
 }
 
-function findToggleParent(): HTMLElement | null {
-  return document.querySelector('.gb_v.gb_we.bGJ') as HTMLElement | null;
+function findHoverRoot(cluster: HTMLElement): HTMLElement {
+  const parent = cluster.parentElement;
+  if (
+    !parent ||
+    parent === document.body ||
+    parent.querySelector('form[role="search"]')
+  ) {
+    return cluster;
+  }
+  return parent;
 }
 
-function removeToggle(): void {
-  document.getElementById(TOGGLE_WRAP_ID)?.remove();
-}
-
-function createChevronSvg(left: boolean): SVGSVGElement {
-  const svg = document.createElementNS(SVG_NS, 'svg');
-  svg.setAttribute('class', 't7');
-  svg.setAttribute('xmlns', SVG_NS);
-  svg.setAttribute('width', '24px');
-  svg.setAttribute('height', '24px');
-  svg.setAttribute('viewBox', '0 0 24 24');
-  svg.setAttribute('fill', '#000000');
-  svg.setAttribute('focusable', 'false');
-
-  const clear = document.createElementNS(SVG_NS, 'path');
-  clear.setAttribute('fill', 'none');
-  clear.setAttribute('d', 'M0 0h24v24H0z');
-  svg.appendChild(clear);
-
-  const path = document.createElementNS(SVG_NS, 'path');
-  path.setAttribute(
-    'd',
-    left
-      ? 'M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z'
-      : 'M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z',
-  );
-  svg.appendChild(path);
-  return svg;
-}
-
-function setChevronIcon(btn: HTMLElement, expanded: boolean): void {
-  const existing = btn.querySelector('svg.t7');
-  const svg = createChevronSvg(!expanded);
-  if (existing) existing.replaceWith(svg);
-  else btn.appendChild(svg);
-}
-
-function updateToggleUi(wrap: HTMLElement, expanded: boolean): void {
-  const btn = wrap.querySelector<HTMLElement>('.mnml-top-right-toggle');
-  if (!btn) return;
-
-  btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-  btn.setAttribute(
-    'aria-label',
-    expanded ? 'Hide account and tools' : 'Show account and tools',
-  );
-  setChevronIcon(btn, expanded);
-}
-
-function createToggle(expanded: boolean): HTMLElement {
-  const wrap = document.createElement('div');
-  wrap.id = TOGGLE_WRAP_ID;
-  wrap.className = 'zo mnml-top-right-toggle-wrap';
-  wrap.setAttribute('data-tooltip', 'Show or hide account and tools');
-
-  const btn = document.createElement('a');
-  btn.className = 'gb_xe gb_h gb_Kd t6 mnml-top-right-toggle';
-  btn.setAttribute('role', 'button');
-  btn.setAttribute('tabindex', '0');
-  btn.href = '#';
-  setChevronIcon(btn, expanded);
-
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const next = !isExpanded();
-    setExpanded(next);
-    updateToggleUi(wrap, next);
-  });
-
-  wrap.appendChild(btn);
-  updateToggleUi(wrap, expanded);
-  return wrap;
-}
-
-function ensureToggle(expanded: boolean): void {
-  const parent = findToggleParent();
-  if (!parent) return;
-
-  let wrap = document.getElementById(TOGGLE_WRAP_ID);
-  if (!wrap) {
-    wrap = createToggle(expanded);
-    parent.insertBefore(wrap, parent.firstChild);
+function markAccount(
+  account: HTMLElement | null,
+  accountWrap: HTMLElement | null,
+  cluster: HTMLElement,
+): void {
+  if (account && account.parentElement === cluster) {
+    setExclusiveAttr(account, ACCOUNT_ATTR);
     return;
   }
+  if (accountWrap && cluster.contains(accountWrap) && accountWrap !== cluster) {
+    setExclusiveAttr(accountWrap, ACCOUNT_ATTR);
+    return;
+  }
+  if (account && cluster.contains(account)) {
+    setExclusiveAttr(account, ACCOUNT_ATTR);
+  }
+}
 
-  if (wrap.parentElement !== parent) {
-    parent.insertBefore(wrap, parent.firstChild);
+function setExclusiveAttr(el: HTMLElement, attr: string): void {
+  for (const prev of document.querySelectorAll(`[${attr}]`)) {
+    if (prev !== el) prev.removeAttribute(attr);
+  }
+  el.setAttribute(attr, '');
+}
+
+function clearMarks(): void {
+  for (const attr of [CLUSTER_ATTR, HOVER_ATTR, ACCOUNT_ATTR, ICON_ATTR]) {
+    for (const el of document.querySelectorAll(`[${attr}]`)) {
+      el.removeAttribute(attr);
+    }
+  }
+}
+
+function isAccountTree(el: Element): boolean {
+  return Boolean(
+    el.closest(`[${ACCOUNT_ATTR}]`) || el.closest(ACCOUNT_SELECTOR),
+  );
+}
+
+function visualIconWrap(el: HTMLElement, cluster: HTMLElement): HTMLElement {
+  const tooltip = el.closest<HTMLElement>('[data-is-tooltip-wrapper]');
+  if (tooltip?.parentElement && tooltip.parentElement !== cluster) {
+    return tooltip.parentElement;
   }
 
-  updateToggleUi(wrap, expanded);
+  const guest = el.closest<HTMLElement>('[data-guest-app-id], [id^="gsc-gab-"]');
+  if (guest?.parentElement && guest.parentElement !== cluster) {
+    return guest.parentElement;
+  }
+
+  let cur = el;
+  while (cur.parentElement) {
+    const parent = cur.parentElement;
+    if (
+      parent === cluster ||
+      parent.id === 'gb' ||
+      parent.tagName === 'HEADER' ||
+      parent.querySelector('form[role="search"]')
+    ) {
+      break;
+    }
+    const rect = parent.getBoundingClientRect();
+    if (rect.width > 80 || rect.height > 80) break;
+    cur = parent;
+  }
+
+  return (
+    cur.closest<HTMLElement>('#gbwa') ??
+    cur.closest<HTMLElement>('.zo') ??
+    cur
+  );
+}
+
+function markCollapsibleIcon(el: HTMLElement, cluster: HTMLElement): void {
+  if (el.id === TOGGLE_WRAP_ID || el.closest(`#${TOGGLE_WRAP_ID}`)) return;
+  if (isAccountTree(el)) return;
+
+  const wrap = visualIconWrap(el, cluster);
+  if (wrap.id === TOGGLE_WRAP_ID || isAccountTree(wrap)) return;
+  if (wrap.querySelector('form[role="search"]')) return;
+  if (wrap === cluster) {
+    el.setAttribute(ICON_ATTR, '');
+    return;
+  }
+  wrap.setAttribute(ICON_ATTR, '');
+}
+
+function markGmailIconStrip(cluster: HTMLElement): void {
+  const probe =
+    document.querySelector<HTMLElement>('[aria-label="Ask Gemini"]') ??
+    document.querySelector<HTMLElement>('[aria-label="Studio"]') ??
+    document.querySelector<HTMLElement>('[aria-label="Support"]') ??
+    document.querySelector<HTMLElement>('[data-tooltip="Support"]');
+  if (!probe || cluster.contains(probe)) return;
+
+  let cur: HTMLElement | null = probe.parentElement;
+  while (cur && cur !== document.body) {
+    if (cur === cluster || cur.querySelector(ACCOUNT_SELECTOR)) {
+      cur = cur.parentElement;
+      continue;
+    }
+    if (cur.querySelector('form[role="search"]')) break;
+
+    const labels = [
+      ...cur.querySelectorAll<HTMLElement>('[aria-label], [data-tooltip]'),
+    ].map((node) =>
+      (node.getAttribute('aria-label') ?? node.getAttribute('data-tooltip') ?? '')
+        .trim(),
+    );
+    const matches = labels.filter((label) => COLLAPSE_LABEL_RE.test(label));
+    if (matches.length >= 2) {
+      cur.setAttribute(ICON_ATTR, '');
+      cur.setAttribute(HOVER_ATTR, '');
+      return;
+    }
+    cur = cur.parentElement;
+  }
+}
+
+function markCollapsibleIcons(root: ParentNode, cluster: HTMLElement): void {
+  for (const el of root.querySelectorAll<HTMLElement>(
+    '[aria-label], [data-tooltip]',
+  )) {
+    const label = (
+      el.getAttribute('aria-label') ??
+      el.getAttribute('data-tooltip') ??
+      ''
+    ).trim();
+    if (!COLLAPSE_LABEL_RE.test(label)) continue;
+    markCollapsibleIcon(el, cluster);
+  }
+}
+
+function markHeaderIcons(cluster: HTMLElement, hoverRoot: HTMLElement): void {
+  markGmailIconStrip(cluster);
+  markCollapsibleIcons(hoverRoot, cluster);
+  if (hoverRoot !== cluster) markCollapsibleIcons(cluster, cluster);
+
+  const parent = cluster.parentElement;
+  if (parent) {
+    for (const sibling of parent.children) {
+      if (sibling === cluster || sibling === hoverRoot) continue;
+      markCollapsibleIcons(sibling, cluster);
+    }
+  }
+
+  const header =
+    document.querySelector('#gb') ??
+    document.querySelector('header') ??
+    document.querySelector('[role="banner"]');
+  if (header && header !== hoverRoot) markCollapsibleIcons(header, cluster);
+}
+
+function removeLegacyToggle(): void {
+  document.getElementById(TOGGLE_WRAP_ID)?.remove();
+  document.documentElement.removeAttribute(EXPANDED_ATTR);
+  sessionStorage.removeItem(SESSION_KEY);
 }
 
 export function isTopRightIconsEnabled(settings: Settings): boolean {
@@ -125,15 +211,21 @@ export async function syncGmailTopRightIcons(
   settings?: Settings,
 ): Promise<void> {
   const resolved = settings ?? (await getSettings());
+  removeLegacyToggle();
 
   if (!isTopRightIconsEnabled(resolved)) {
-    document.documentElement.removeAttribute(EXPANDED_ATTR);
-    sessionStorage.removeItem(SESSION_KEY);
-    removeToggle();
+    clearMarks();
     return;
   }
 
-  const expanded = isExpanded();
-  setExpanded(expanded);
-  ensureToggle(expanded);
+  const account = findAccountLink();
+  const accountWrap = findAccountWrap(account);
+  const cluster = findCluster(accountWrap);
+  if (!cluster) return;
+
+  const hoverRoot = findHoverRoot(cluster);
+  setExclusiveAttr(cluster, CLUSTER_ATTR);
+  setExclusiveAttr(hoverRoot, HOVER_ATTR);
+  markAccount(account, accountWrap, cluster);
+  markHeaderIcons(cluster, hoverRoot);
 }

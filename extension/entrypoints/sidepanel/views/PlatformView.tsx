@@ -1,4 +1,8 @@
 import {
+  Alert,
+  AlertDescription,
+} from '@/components/ui/alert';
+import {
   Card,
   CardContent,
   CardDescription,
@@ -52,9 +56,11 @@ export function PlatformView({
       </div>
 
       {!settings.global.enabled && (
-        <div className="rounded-lg border border-dashed bg-muted/40 px-4 py-3 text-sm text-muted-foreground">
-          mnml is disabled. Enable it under General to apply these hides.
-        </div>
+        <Alert>
+          <AlertDescription>
+            mnml is disabled. Enable it under General to apply these hides.
+          </AlertDescription>
+        </Alert>
       )}
 
       <Card>
@@ -130,7 +136,7 @@ export const GMAIL_TOGGLES: GmailToggleDef[] = [
     key: 'topRightIcons',
     label: 'Hide top-right menu icons',
     description:
-      'Collapse Support, Settings, Gemini, Google apps, and your account avatar. The chevron stays subdued until you hover or focus it.',
+      'Hide Support, Settings, Studio, Gemini, and Google apps. Your account avatar stays visible. The other icons appear when you hover or tab into that corner.',
   },
   {
     key: 'footer',
