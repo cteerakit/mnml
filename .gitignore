@@ -8,10 +8,6 @@ stats-*.json
 .wxt
 web-ext.config.ts
 
-# Web build output
-dist/
-.astro/
-
 # Logs
 logs
 *.log

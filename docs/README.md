@@ -33,5 +33,5 @@ No build step. Push changes under `docs/` to publish.
 ## Content maintenance
 
 - **Features:** Update the Gmail and YouTube lists in [`index.html`](index.html).
-- **Privacy:** Update [`privacy/index.html`](privacy/index.html) and keep in sync with [`../apps/extension/PRIVACY.md`](../apps/extension/PRIVACY.md).
-- **Icons:** Copy from `../apps/extension/.output/chrome-mv3/icon/` into `icon/` after rebuilding the extension.
+- **Privacy:** Update [`privacy/index.html`](privacy/index.html) and keep in sync with [`../extension/PRIVACY.md`](../extension/PRIVACY.md).
+- **Icons:** Copy from `../extension/.output/chrome-mv3/icon/` into `icon/` after rebuilding the extension.

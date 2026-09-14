@@ -8,7 +8,7 @@ importers:
 
   .: {}
 
-  apps/extension:
+  extension:
     dependencies:
       '@fontsource/inter':
         specifier: ^5.2.8

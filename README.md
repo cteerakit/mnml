@@ -8,7 +8,7 @@ Monorepo for **mnml** — a Chrome extension that hides distracting UI on Gmail,
 
 | Package | Path | Description |
 |---------|------|-------------|
-| Extension | [`apps/extension`](apps/extension) | WXT + React Chrome extension |
+| Extension | [`extension`](extension) | WXT + React Chrome extension |
 | Web | [`docs`](docs) | Static HTML/CSS marketing site (GitHub Pages) |
 
 ## Setup
@@ -21,7 +21,7 @@ pnpm install
 
 ## Development
 
-**Extension** (loads from `apps/extension/.output/chrome-mv3`):
+**Extension** (loads from `extension/.output/chrome-mv3`):
 
 ```bash
 pnpm dev
@@ -45,7 +45,7 @@ The website has no build step — edit HTML/CSS in `docs/` directly.
 
 ## Privacy policy
 
-The public privacy policy lives at [https://mnml.teerakit.com/privacy/](https://mnml.teerakit.com/privacy/). Source: [`docs/privacy/index.html`](docs/privacy/index.html) (sync with [`apps/extension/PRIVACY.md`](apps/extension/PRIVACY.md)).
+The public privacy policy lives at [https://mnml.teerakit.com/privacy/](https://mnml.teerakit.com/privacy/). Source: [`docs/privacy/index.html`](docs/privacy/index.html) (sync with [`extension/PRIVACY.md`](extension/PRIVACY.md)).
 
 ## Deploy (GitHub Pages)
 
